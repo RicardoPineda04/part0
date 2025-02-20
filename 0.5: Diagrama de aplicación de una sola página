@@ -1,0 +1,22 @@
+sequenceDiagram
+    participant Navegador
+    participant Servidor
+
+    Navegador->>Servidor: GET https://studies.cs.helsinki.fi/exampleapp/spa
+    activate Servidor
+    Servidor->>Navegador: HTML Document
+    deactivate Servidor
+    Navegador->>Servidor: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate Servidor
+    Servidor->>Navegador: CSS Stylesheet
+    deactivate Servidor
+    Navegador->>Servidor: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+    activate Servidor
+    Servidor->>Navegador: Archivo JS
+    deactivate Servidor
+    Navegador->>Servidor: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate Servidor
+    Servidor->>Navegador: Content: [{ "content" : "New Note to test", "date": "2025-02-20T13:51:34.016Z"},...]
+    deactivate Servidor
+
+     Note Left of Navegador: Obtiene lista de notas <br>para renderizar lista HTML
