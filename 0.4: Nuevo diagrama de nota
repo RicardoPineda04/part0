@@ -1,0 +1,33 @@
+sequenceDiagram
+    participant Usuario
+    participant Navegador
+    participant Servidor
+
+    Usuario->>Navegador: WRITE: 'New Note to test'
+    Navegador->>Servidor: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    activate Servidor
+    Note right of Servidor: PUSH EN OBJECTO NOTA PARA <br/>GUARDAR NUEVA NOTA.
+    Servidor->>Navegador: REDIRECT_302 https://studies.cs.helsinki.fi/exampleapp/notes
+    deactivate Servidor
+    Navegador->>Servidor: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate Servidor
+    Servidor->>Navegador: HTML Document
+    deactivate Servidor
+    Navegador->>Servidor: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate Servidor
+    Servidor->>Navegador: CSS Stylesheet
+    deactivate Servidor
+    Navegador->>Servidor: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate Servidor
+    Servidor->>Navegador: Archivo JS
+    deactivate Servidor
+
+    Note Left of Navegador: Carga de archivo para <br/>hacer fetch a archivo json
+    Navegador->>Servidor: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate Servidor
+    Servidor->>Navegador: Content: [{ "content" : "New Note to test", "date": "2025-02-20T13:51:34.016Z"},...]
+    deactivate Servidor
+
+    Note Left of Navegador: Renderizado de lista de notas
+
+    Navegador->>Usuario: Servir lista de notas con la ultima nota creada
