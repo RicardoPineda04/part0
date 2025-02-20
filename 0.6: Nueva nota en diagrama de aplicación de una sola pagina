@@ -1,0 +1,18 @@
+sequenceDiagram
+    participant Usuario
+    participant Navegador
+    participant Servidor
+
+    Navegador->>Servidor: GET https://studies.cs.helsinki.fi/exampleapp/spa
+    activate Servidor
+    Servidor->>Navegador: HTML Document
+    deactivate Servidor
+    Usuario->>Navegador: WRITE: 'New Note to test'
+    Note right of Navegador: SE EJECUTA UN EVENTO AL <BR>ENVIAR FORMULARIO, EJECUTANDO <BR>https://studies.cs.helsinki.fi/exampleapp/spa.js.
+    Navegador->>Servidor: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    activate Servidor
+    Servidor->>Navegador: Response 201 Created
+    deactivate Servidor
+    Note right of Navegador: SE EJECUTA UN EVENTO AL <BR>RECIBIR RESPONSE 201, EJECUTANDO <BR>FUNCION PARA RENDERIZAR LA LISTA ACTUALIZADA
+    Navegador->>Usuario: Servir lista de notas con la ultima nota creada
+    
